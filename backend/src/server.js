@@ -13,12 +13,13 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve();
 
+const allowedOrigins = process.env.NODE_ENV === "production" 
+  ? ["https://yourdomain.com"] // Update with your production domain
+  : ["http://localhost:5173", "http://localhost:3000"];
+
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? true
-        : "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
